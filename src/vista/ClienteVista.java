@@ -7,6 +7,9 @@ package vista;
 
 import comunicacion.Cliente;
 import comunicacion.Servidor;
+import hilos.HiloDisco;
+import hilos.HiloProcesador;
+import hilos.HiloRam;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -20,6 +23,9 @@ public class ClienteVista extends javax.swing.JFrame {
     int yMouse=0;
     int contador=0;
     Cliente c;
+    HiloRam hram;
+    HiloDisco hdisco;
+    HiloProcesador hprocesador;
     
     public ClienteVista() {
         initComponents();
@@ -28,6 +34,12 @@ public class ClienteVista extends javax.swing.JFrame {
             comando.setText("Error al conectarse con el server");
             comando.setEditable(false);
         }
+        hram = new HiloRam(porcentajememoria,c);
+        hram.start();
+        hdisco = new HiloDisco(porcentajedisco,c);
+        hdisco.start();
+        hprocesador = new HiloProcesador(porcentajeprocesador,c);
+        hprocesador.start();
         //new Servidor();
         
         /*try{
@@ -112,7 +124,7 @@ public class ClienteVista extends javax.swing.JFrame {
             }
         });
 
-        close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/error.png"))); // NOI18N
+        close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/closecolor.png"))); // NOI18N
         close.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         close.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -125,9 +137,8 @@ public class ClienteVista extends javax.swing.JFrame {
         panelarrastrarLayout.setHorizontalGroup(
             panelarrastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelarrastrarLayout.createSequentialGroup()
-                .addContainerGap(736, Short.MAX_VALUE)
-                .addComponent(close)
-                .addContainerGap())
+                .addGap(0, 748, Short.MAX_VALUE)
+                .addComponent(close))
         );
         panelarrastrarLayout.setVerticalGroup(
             panelarrastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,7 +167,7 @@ public class ClienteVista extends javax.swing.JFrame {
         });
         background.add(comando, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 330, 30));
 
-        lupa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lupa.png"))); // NOI18N
+        lupa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lupacolor.png"))); // NOI18N
         lupa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lupa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -176,7 +187,7 @@ public class ClienteVista extends javax.swing.JFrame {
         labelmemoria.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         labelmemoria.setText("Used Memory");
 
-        graficamemoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/barra-grafica.png"))); // NOI18N
+        graficamemoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/barra-graficacolor.png"))); // NOI18N
         graficamemoria.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout memoriaLayout = new javax.swing.GroupLayout(memoria);
@@ -188,14 +199,14 @@ public class ClienteVista extends javax.swing.JFrame {
                     .addGroup(memoriaLayout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addComponent(labelmemoria))
-                    .addGroup(memoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(memoriaLayout.createSequentialGroup()
-                            .addGap(80, 80, 80)
-                            .addComponent(porcentajememoria, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, memoriaLayout.createSequentialGroup()
-                            .addGap(88, 88, 88)
-                            .addComponent(graficamemoria))))
+                    .addGroup(memoriaLayout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(graficamemoria)))
                 .addContainerGap(57, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, memoriaLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(porcentajememoria, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71))
         );
         memoriaLayout.setVerticalGroup(
             memoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,7 +225,7 @@ public class ClienteVista extends javax.swing.JFrame {
         labeldisco.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         labeldisco.setText("Used Disk");
 
-        graficadisco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/barra-grafica.png"))); // NOI18N
+        graficadisco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/barra-graficacolor.png"))); // NOI18N
         graficadisco.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout discoLayout = new javax.swing.GroupLayout(disco);
@@ -251,7 +262,7 @@ public class ClienteVista extends javax.swing.JFrame {
         labelprocesador.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         labelprocesador.setText("Used Processor");
 
-        graficaprocesador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/barra-grafica.png"))); // NOI18N
+        graficaprocesador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/barra-graficacolor.png"))); // NOI18N
         graficaprocesador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout procesadorLayout = new javax.swing.GroupLayout(procesador);
@@ -310,8 +321,8 @@ public class ClienteVista extends javax.swing.JFrame {
 
         background.add(bgestados, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, 250, 700));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuario-especialista.png"))); // NOI18N
-        background.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 60, 70, 70));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/clientela.png"))); // NOI18N
+        background.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 70, 70));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -360,7 +371,7 @@ public class ClienteVista extends javax.swing.JFrame {
         
         //resultado de codigo
        
-       String comandoMostrar=c.comando(comando.getText());
+       String comandoMostrar=c.comando(comando.getText(),"-.-0");
        
        System.out.println(comandoMostrar);
        if(comando.getText().equals("clear")){
@@ -369,6 +380,7 @@ public class ClienteVista extends javax.swing.JFrame {
            //resultadocomando.append(comandoMostrar);
            resultadocomando.setText(resultadocomando.getText()+comandoMostrar);
        }
+       comando.setText("");
         
     }//GEN-LAST:event_lupaMouseClicked
 

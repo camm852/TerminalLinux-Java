@@ -67,14 +67,14 @@ public class Cliente {
             return false;
         }
     }
-    public String comando(String comando){
+    public String comando(String comando,String idenfificador){
         DataOutputStream fSalida; //lo que envia
         DataInputStream fEntrada; // lo que recibe 
         try{
             //lo que envia al servidor
 
             fSalida = new DataOutputStream(socket.getOutputStream());
-            fSalida.writeUTF(comando);
+            fSalida.writeUTF(comando+idenfificador);
             //lo que trae del servidor
             fEntrada = new DataInputStream(socket.getInputStream());
             String comandoEntrada = fEntrada.readUTF();

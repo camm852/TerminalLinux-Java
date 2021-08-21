@@ -106,9 +106,8 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="736" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="748" max="32767" attributes="0"/>
                       <Component id="close" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -122,7 +121,7 @@
             <Component class="javax.swing.JLabel" name="close">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imagenes/error.png"/>
+                  <Image iconType="3" name="/imagenes/closecolor.png"/>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
@@ -173,7 +172,7 @@
         <Component class="javax.swing.JLabel" name="lupa">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagenes/lupa.png"/>
+              <Image iconType="3" name="/imagenes/lupacolor.png"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -254,24 +253,23 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                                   <Component id="labelmemoria" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
-                                      <Component id="porcentajememoria" min="-2" pref="41" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
-                                      <Component id="graficamemoria" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                                  <Component id="graficamemoria" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace pref="57" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="porcentajememoria" min="-2" pref="50" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -303,7 +301,7 @@
                 <Component class="javax.swing.JLabel" name="graficamemoria">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagenes/barra-grafica.png"/>
+                      <Image iconType="3" name="/imagenes/barra-graficacolor.png"/>
                     </Property>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
@@ -369,7 +367,7 @@
                 <Component class="javax.swing.JLabel" name="graficadisco">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagenes/barra-grafica.png"/>
+                      <Image iconType="3" name="/imagenes/barra-graficacolor.png"/>
                     </Property>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
@@ -436,7 +434,7 @@
                 <Component class="javax.swing.JLabel" name="graficaprocesador">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/imagenes/barra-grafica.png"/>
+                      <Image iconType="3" name="/imagenes/barra-graficacolor.png"/>
                     </Property>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
@@ -450,12 +448,12 @@
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagenes/usuario-especialista.png"/>
+              <Image iconType="3" name="/imagenes/clientela.png"/>
             </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="164" y="60" width="70" height="70"/>
+              <AbsoluteConstraints x="240" y="60" width="70" height="70"/>
             </Constraint>
           </Constraints>
         </Component>

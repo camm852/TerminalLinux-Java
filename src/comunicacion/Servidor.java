@@ -34,7 +34,23 @@ public class Servidor {
                         // lo que recibe del cliente
                         fEntrada = new DataInputStream(sConexion.getInputStream());
                         comando = fEntrada.readUTF();
-
+                        String identificador = null;
+                        if(comando.contains("-.-0")){
+                            identificador="0";
+                            comando=comando.replace("-.-0","");
+                        }
+                        if(comando.contains("-.-1")){
+                            identificador="1";
+                            comando=comando.replace("-.-1","");
+                        }
+                        if(comando.contains("-.-2")){
+                            identificador="2";
+                            comando=comando.replace("-.-2","");
+                        }
+                        if(comando.contains("-.-3")){
+                            identificador="3";
+                            comando=comando.replace("-.-3","");
+                        }
                         //comando a ejecutar
                         b=new ProcessBuilder().command(comando.split(" "));
                         Process p = b.start();
@@ -42,7 +58,19 @@ public class Servidor {
 
                         //lo que le envia al cliente
                         fSalida = new DataOutputStream(sConexion.getOutputStream());
-                        System.out.println("Envie algo al cliente");
+                        if(identificador=="0"){
+                            System.out.println("Resultado del comando "+comando+" fue enviado");
+                        }
+                        if(identificador=="1"){
+                            System.out.println("El consumo de ram fue enviado ");
+                        }
+                        if(identificador=="2"){
+                            System.out.println("El consumo del disco fue enviado");
+                        }
+                        if(identificador=="3"){
+                            System.out.println("El cosumo del procesador fue enviado");
+                        }
+                        
                         //comandoSalida=entEstandar.readLine();
                         //fSalida.writeUTF(mensajeOut);
                         String salida;
