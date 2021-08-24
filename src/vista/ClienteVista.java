@@ -8,10 +8,16 @@ package vista;
 import comunicacion.Cliente;
 import comunicacion.Servidor;
 import hilos.HiloDisco;
+import hilos.HiloGraficaRam;
 import hilos.HiloProcesador;
 import hilos.HiloRam;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import javax.swing.JFrame;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -26,6 +32,7 @@ public class ClienteVista extends javax.swing.JFrame {
     HiloRam hram;
     HiloDisco hdisco;
     HiloProcesador hprocesador;
+    HiloGraficaRam graficaram;
     
     public ClienteVista() {
         initComponents();
@@ -34,12 +41,20 @@ public class ClienteVista extends javax.swing.JFrame {
             comando.setText("Error al conectarse con el server");
             comando.setEditable(false);
         }
-        hram = new HiloRam(porcentajememoria,c);
+        hram = new HiloRam(porcentajememoria,c,memoria);
         hram.start();
-        hdisco = new HiloDisco(porcentajedisco,c);
+        
+        
+        hdisco = new HiloDisco(porcentajedisco,c,disco);
         hdisco.start();
+        
+        
         hprocesador = new HiloProcesador(porcentajeprocesador,c);
         hprocesador.start();
+        
+        /*graficaram = new HiloGraficaRam(memoria,hram);
+        graficaram.start();*/
+        
         //new Servidor();
         
         /*try{
@@ -72,18 +87,12 @@ public class ClienteVista extends javax.swing.JFrame {
         separador = new javax.swing.JSeparator();
         bgestados = new javax.swing.JPanel();
         memoria = new javax.swing.JPanel();
-        labelmemoria = new javax.swing.JLabel();
-        porcentajememoria = new javax.swing.JLabel();
-        graficamemoria = new javax.swing.JLabel();
         disco = new javax.swing.JPanel();
-        labeldisco = new javax.swing.JLabel();
-        porcentajedisco = new javax.swing.JLabel();
-        graficadisco = new javax.swing.JLabel();
         procesador = new javax.swing.JPanel();
-        labelprocesador = new javax.swing.JLabel();
+        porcentajememoria = new javax.swing.JLabel();
         porcentajeprocesador = new javax.swing.JLabel();
-        graficaprocesador = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        porcentajedisco = new javax.swing.JLabel();
+        logoCliente = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -110,7 +119,7 @@ public class ClienteVista extends javax.swing.JFrame {
         resultadocomando.setBorder(null);
         scroll.setViewportView(resultadocomando);
 
-        background.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 510, 460));
+        background.add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 570, 740));
 
         panelarrastrar.setBackground(new java.awt.Color(215, 7, 81));
         panelarrastrar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -137,7 +146,7 @@ public class ClienteVista extends javax.swing.JFrame {
         panelarrastrarLayout.setHorizontalGroup(
             panelarrastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelarrastrarLayout.createSequentialGroup()
-                .addGap(0, 748, Short.MAX_VALUE)
+                .addGap(0, 968, Short.MAX_VALUE)
                 .addComponent(close))
         );
         panelarrastrarLayout.setVerticalGroup(
@@ -145,7 +154,7 @@ public class ClienteVista extends javax.swing.JFrame {
             .addComponent(close, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        background.add(panelarrastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 50));
+        background.add(panelarrastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 50));
 
         nombrecliente.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
         nombrecliente.setForeground(new java.awt.Color(1, 1, 1));
@@ -183,152 +192,104 @@ public class ClienteVista extends javax.swing.JFrame {
         bgestados.setBackground(new java.awt.Color(215, 7, 81));
 
         memoria.setBackground(new java.awt.Color(254, 254, 254));
-
-        labelmemoria.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        labelmemoria.setText("Used Memory");
-
-        graficamemoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/barra-graficacolor.png"))); // NOI18N
-        graficamemoria.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        memoria.setPreferredSize(new java.awt.Dimension(303, 269));
 
         javax.swing.GroupLayout memoriaLayout = new javax.swing.GroupLayout(memoria);
         memoria.setLayout(memoriaLayout);
         memoriaLayout.setHorizontalGroup(
             memoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(memoriaLayout.createSequentialGroup()
-                .addGroup(memoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(memoriaLayout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(labelmemoria))
-                    .addGroup(memoriaLayout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(graficamemoria)))
-                .addContainerGap(57, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, memoriaLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(porcentajememoria, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71))
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         memoriaLayout.setVerticalGroup(
             memoriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(memoriaLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(labelmemoria)
-                .addGap(18, 18, 18)
-                .addComponent(porcentajememoria, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-                .addGap(33, 33, 33)
-                .addComponent(graficamemoria)
-                .addGap(22, 22, 22))
+            .addGap(0, 269, Short.MAX_VALUE)
         );
 
         disco.setBackground(new java.awt.Color(254, 254, 254));
-
-        labeldisco.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        labeldisco.setText("Used Disk");
-
-        graficadisco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/barra-graficacolor.png"))); // NOI18N
-        graficadisco.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        disco.setPreferredSize(new java.awt.Dimension(330, 269));
 
         javax.swing.GroupLayout discoLayout = new javax.swing.GroupLayout(disco);
         disco.setLayout(discoLayout);
         discoLayout.setHorizontalGroup(
             discoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(discoLayout.createSequentialGroup()
-                .addGroup(discoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(discoLayout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(labeldisco))
-                    .addGroup(discoLayout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(graficadisco))
-                    .addGroup(discoLayout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(porcentajedisco, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(71, Short.MAX_VALUE))
+            .addGap(0, 350, Short.MAX_VALUE)
         );
         discoLayout.setVerticalGroup(
             discoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(discoLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(labeldisco)
-                .addGap(18, 18, 18)
-                .addComponent(porcentajedisco, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(graficadisco)
-                .addGap(22, 22, 22))
+            .addGap(0, 269, Short.MAX_VALUE)
         );
 
         procesador.setBackground(new java.awt.Color(254, 254, 254));
-
-        labelprocesador.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        labelprocesador.setText("Used Processor");
-
-        graficaprocesador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/barra-graficacolor.png"))); // NOI18N
-        graficaprocesador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout procesadorLayout = new javax.swing.GroupLayout(procesador);
         procesador.setLayout(procesadorLayout);
         procesadorLayout.setHorizontalGroup(
             procesadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, procesadorLayout.createSequentialGroup()
-                .addContainerGap(55, Short.MAX_VALUE)
-                .addComponent(labelprocesador)
-                .addGap(46, 46, 46))
-            .addGroup(procesadorLayout.createSequentialGroup()
-                .addGroup(procesadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(procesadorLayout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addComponent(graficaprocesador))
-                    .addGroup(procesadorLayout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(porcentajeprocesador, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         procesadorLayout.setVerticalGroup(
             procesadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(procesadorLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(labelprocesador)
-                .addGap(18, 18, 18)
-                .addComponent(porcentajeprocesador, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(graficaprocesador)
-                .addGap(22, 22, 22))
+            .addGap(0, 257, Short.MAX_VALUE)
         );
+
+        porcentajememoria.setBackground(new java.awt.Color(255, 255, 255));
+
+        porcentajeprocesador.setBackground(new java.awt.Color(255, 255, 255));
+
+        porcentajedisco.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout bgestadosLayout = new javax.swing.GroupLayout(bgestados);
         bgestados.setLayout(bgestadosLayout);
         bgestadosLayout.setHorizontalGroup(
             bgestadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgestadosLayout.createSequentialGroup()
+                .addGap(0, 167, Short.MAX_VALUE)
+                .addComponent(porcentajememoria, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(161, 161, 161))
             .addGroup(bgestadosLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
                 .addGroup(bgestadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(procesador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(disco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(memoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                    .addGroup(bgestadosLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(bgestadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(procesador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(disco, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                            .addComponent(memoria, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)))
+                    .addGroup(bgestadosLayout.createSequentialGroup()
+                        .addGap(175, 175, 175)
+                        .addComponent(porcentajeprocesador, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(bgestadosLayout.createSequentialGroup()
+                        .addGap(175, 175, 175)
+                        .addComponent(porcentajedisco, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         bgestadosLayout.setVerticalGroup(
             bgestadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgestadosLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(39, 39, 39)
                 .addComponent(memoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76)
+                .addGap(18, 18, 18)
+                .addComponent(porcentajememoria, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(disco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(porcentajedisco, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(procesador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(porcentajeprocesador, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        background.add(bgestados, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, 250, 700));
+        background.add(bgestados, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, 400, 1010));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/clientela.png"))); // NOI18N
-        background.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 70, 70));
+        logoCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/clientela.png"))); // NOI18N
+        background.add(logoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1002, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -426,13 +387,7 @@ public class ClienteVista extends javax.swing.JFrame {
     private javax.swing.JLabel close;
     private javax.swing.JTextField comando;
     private javax.swing.JPanel disco;
-    private javax.swing.JLabel graficadisco;
-    private javax.swing.JLabel graficamemoria;
-    private javax.swing.JLabel graficaprocesador;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel labeldisco;
-    private javax.swing.JLabel labelmemoria;
-    private javax.swing.JLabel labelprocesador;
+    private javax.swing.JLabel logoCliente;
     private javax.swing.JLabel lupa;
     private javax.swing.JPanel memoria;
     private javax.swing.JLabel nombrecliente;

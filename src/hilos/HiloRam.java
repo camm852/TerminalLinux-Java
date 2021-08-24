@@ -1,18 +1,28 @@
 package hilos;
 
 import comunicacion.Cliente;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
 
 public class HiloRam extends Thread {
     javax.swing.JLabel porcentajememoria;
+    javax.swing.JPanel graficoMemoria;
     Cliente c;
-    int contador=0;
-    public HiloRam(javax.swing.JLabel porcentajememoria, Cliente c){
+   
+    
+    
+    public HiloRam(javax.swing.JLabel porcentajememoria, Cliente c, javax.swing.JPanel graficoMemoria){
         this.porcentajememoria=porcentajememoria;
         this.c=c;
+        this.graficoMemoria=graficoMemoria;
     }
     
     public void run(){        
@@ -44,12 +54,37 @@ public class HiloRam extends Thread {
                 System.out.println("usado:"+ porcentajeUsado);
                 System.out.println("total: "+ porcentajeTotal);
                 porcentajememoria.setText(arreglarComando(porcentajeUsado, porcentajeTotal)+"");
-                Thread.sleep(2*1000);
+                pintar(arreglarComando(porcentajeUsado, porcentajeTotal));
+                Thread.sleep(1*1000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(HiloRam.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
+    
+    public void pintar(String memoriaUsada){
+        String ramUsada=memoriaUsada.replace("%","");
+        
+        DefaultPieDataset datos = new DefaultPieDataset();
+        datos.setValue("Usado",Double.parseDouble(ramUsada));
+        datos.setValue("Disponible", 100.00-Double.parseDouble(ramUsada));
+
+        JFreeChart grafico_circular = ChartFactory.createPieChart(
+        "Memoria usada",
+         datos,
+         true,
+         true,
+         false
+        );
+        ChartPanel panel = new ChartPanel(grafico_circular);
+
+        panel.setMouseWheelEnabled(true);
+        panel.setPreferredSize(new Dimension(303,269));
+        this.graficoMemoria.setLayout(new BorderLayout());
+        panel.repaint();
+        this.graficoMemoria.add(panel,BorderLayout.NORTH);             
+    }
+    
     private String arreglarComando(String usado,String total){
         Pattern patron = Pattern.compile("[0-9]+");	
         String mensaje [] = usado.split(" ");

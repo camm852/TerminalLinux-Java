@@ -20,7 +20,7 @@ public class HiloProcesador extends Thread {
                 String porcentaje=c.comando("df --output=pcent /dev/sda2","-.-3");
                 porcentaje=porcentaje.replace("Uso%","");
                 porcentajeprocesador.setText(porcentaje);
-                Thread.sleep((long) (2.5*1000));
+                Thread.sleep((long) (1*1000));
             } catch (InterruptedException ex) {
                 Logger.getLogger(HiloRam.class.getName()).log(Level.SEVERE, null, ex);
             }
