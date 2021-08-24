@@ -8,7 +8,6 @@ package vista;
 import comunicacion.Cliente;
 import comunicacion.Servidor;
 import hilos.HiloDisco;
-import hilos.HiloGraficaRam;
 import hilos.HiloProcesador;
 import hilos.HiloRam;
 import java.io.BufferedReader;
@@ -32,7 +31,7 @@ public class ClienteVista extends javax.swing.JFrame {
     HiloRam hram;
     HiloDisco hdisco;
     HiloProcesador hprocesador;
-    HiloGraficaRam graficaram;
+   
     
     public ClienteVista() {
         initComponents();
