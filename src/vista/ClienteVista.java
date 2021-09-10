@@ -1,6 +1,6 @@
 package vista;
 
-import comunicacion.Cliente;
+import servidorCliente.Cliente;
 import graficos.GraficoDisco;
 import graficos.GraficoProcesador;
 import graficos.GraficoRam;

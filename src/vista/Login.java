@@ -1,6 +1,6 @@
 package vista;
 
-import comunicacion.Cliente;
+import servidorCliente.Cliente;
 import java.awt.Color;
 import javax.swing.JLabel;
 import login.Entrar;

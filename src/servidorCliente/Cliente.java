@@ -1,4 +1,4 @@
-package comunicacion;
+package servidorCliente;
 
 import java.io.*;
 import javax.swing.*;

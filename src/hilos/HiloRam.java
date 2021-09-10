@@ -1,6 +1,6 @@
 package hilos;
 
-import comunicacion.Cliente;
+import servidorCliente.Cliente;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;

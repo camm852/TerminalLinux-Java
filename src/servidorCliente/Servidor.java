@@ -1,5 +1,5 @@
 
-package comunicacion;
+package servidorCliente;
 
 //***** EJECUTAR EN GNU/LINUX ********
 
