@@ -18,41 +18,7 @@ public class Cliente {
     	
     	this.ip=ip;
         this.puerto=puerto;
-    	
-    	/*try {
 
-			
-			
-        	do {
-        		
-        		// lo que le envia al servidor
-        		Process p = b.start();
-    			BufferedReader entEstandar = new BufferedReader(new InputStreamReader(p.getInputStream()));
-    			mensajeOut=null;
-        		fSalida = new DataOutputStream(socket.getOutputStream());
-        		while((salida = entEstandar.readLine()) != null) {
-        			if(salida.contains("so")) {
-        				continue;
-        			}
-        			else mensajeOut=salida;
-    			}
-        		mensajeOut=mensajeOut.replace(" ","");
-        		fSalida.writeUTF(mensajeOut);
-        		
-        		// lo que recibe del servidor
-        		fEntrada = new DataInputStream(socket.getInputStream());
-				mensajeIn = fEntrada.readUTF();
-				System.out.println("Cliente: El servidor dice que su consumo de memoria es: "+ mensajeIn);
-				Thread.sleep(1*1000);
-            	
-			} while (!mensajeOut.equals("exit"));
-        	
-        	
-		} catch (Exception e) {
-			
-		}*/
-    	
-    	
     }
     public boolean conectar(){
     	InetAddress IP;
@@ -70,6 +36,8 @@ public class Cliente {
     public String comando(String comando,String idenfificador){
         DataOutputStream fSalida; //lo que envia
         DataInputStream fEntrada; // lo que recibe 
+        
+        
         try{
             //lo que envia al servidor
 

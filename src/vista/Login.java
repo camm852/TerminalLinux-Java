@@ -87,6 +87,11 @@ public class Login extends javax.swing.JFrame {
                 passtextMousePressed(evt);
             }
         });
+        passtext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passtextActionPerformed(evt);
+            }
+        });
 
         password.setFont(new java.awt.Font("Roboto Light", 1, 18)); // NOI18N
         password.setForeground(new java.awt.Color(254, 254, 254));
@@ -94,7 +99,6 @@ public class Login extends javax.swing.JFrame {
 
         separador2.setBackground(new java.awt.Color(254, 254, 254));
         separador2.setForeground(new java.awt.Color(254, 254, 254));
-        separador2.setBorder(null);
 
         btnlogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/login.png"))); // NOI18N
         btnlogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -113,6 +117,16 @@ public class Login extends javax.swing.JFrame {
         bgform.setLayout(bgformLayout);
         bgformLayout.setHorizontalGroup(
             bgformLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgformLayout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addComponent(iconuser, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
+            .addGroup(bgformLayout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addComponent(btnlogin)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(bgformLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(bgformLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,27 +135,14 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(separador2)
                     .addComponent(passtext)
                     .addGroup(bgformLayout.createSequentialGroup()
-                        .addGap(5, 5, 5)
                         .addGroup(bgformLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(incorrect)
                             .addComponent(password)
-                            .addComponent(usuario))
+                            .addGroup(bgformLayout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(usuario)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgformLayout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
-                .addComponent(iconuser, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
-            .addGroup(bgformLayout.createSequentialGroup()
-                .addGroup(bgformLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(bgformLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(incorrect))
-                    .addGroup(bgformLayout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(btnlogin)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         bgformLayout.setVerticalGroup(
             bgformLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,27 +153,27 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(login))
                 .addGap(45, 45, 45)
                 .addComponent(usuario)
-                .addGap(39, 39, 39)
+                .addGap(18, 18, 18)
                 .addComponent(usuariotext, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(separador, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
                 .addComponent(password)
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addComponent(passtext, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(separador2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnlogin)
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
                 .addComponent(incorrect, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         background.add(bgform, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 650));
 
         debian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Debian_logo.png"))); // NOI18N
-        background.add(debian, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, 320, 420));
+        background.add(debian, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 300, 430));
 
         panelarrastrar.setBackground(new java.awt.Color(254, 254, 254));
         panelarrastrar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -186,6 +187,19 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout panelarrastrarLayout = new javax.swing.GroupLayout(panelarrastrar);
+        panelarrastrar.setLayout(panelarrastrarLayout);
+        panelarrastrarLayout.setHorizontalGroup(
+            panelarrastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 450, Short.MAX_VALUE)
+        );
+        panelarrastrarLayout.setVerticalGroup(
+            panelarrastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        background.add(panelarrastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 450, -1));
+
         closeaplication.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/close.png"))); // NOI18N
         closeaplication.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         closeaplication.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -193,33 +207,19 @@ public class Login extends javax.swing.JFrame {
                 closeaplicationMouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout panelarrastrarLayout = new javax.swing.GroupLayout(panelarrastrar);
-        panelarrastrar.setLayout(panelarrastrarLayout);
-        panelarrastrarLayout.setHorizontalGroup(
-            panelarrastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelarrastrarLayout.createSequentialGroup()
-                .addGap(0, 420, Short.MAX_VALUE)
-                .addComponent(closeaplication, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        panelarrastrarLayout.setVerticalGroup(
-            panelarrastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelarrastrarLayout.createSequentialGroup()
-                .addComponent(closeaplication, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 60, Short.MAX_VALUE))
-        );
-
-        background.add(panelarrastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 450, -1));
+        background.add(closeaplication, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 10, 30, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -272,8 +272,6 @@ public class Login extends javax.swing.JFrame {
                 Thread.sleep((long) (0.5*1000));
                 new ClienteVista().setVisible(true);
                 this.setVisible(false);
-                
-                
             }else{
                 incorrect.setVisible(true);
             }
@@ -283,6 +281,10 @@ public class Login extends javax.swing.JFrame {
             
         
     }//GEN-LAST:event_btnloginMouseClicked
+
+    private void passtextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passtextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passtextActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

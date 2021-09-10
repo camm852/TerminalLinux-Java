@@ -1,28 +1,25 @@
 package hilos;
 
 import comunicacion.Cliente;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.general.DefaultPieDataset;
+
 
 public class HiloRam extends Thread {
+    
     javax.swing.JLabel porcentajememoria;
     javax.swing.JPanel graficoMemoria;
     Cliente c;
-   
+    String porcentaje=null;
     
     
     public HiloRam(javax.swing.JLabel porcentajememoria, Cliente c, javax.swing.JPanel graficoMemoria){
         this.porcentajememoria=porcentajememoria;
         this.c=c;
         this.graficoMemoria=graficoMemoria;
+        
     }
     
     public void run(){        
@@ -32,7 +29,6 @@ public class HiloRam extends Thread {
                 String resultadoComando=c.comando("vmstat -s -S M","-.-1");
                 String [] usedMemory= null;
                 String porcentajeUsado = null,porcentajeTotal=null;
-                
                 usedMemory=resultadoComando.split("\n");
                 System.out.println(usedMemory);
                 for(int i=0;i<usedMemory.length;i++){
@@ -49,40 +45,21 @@ public class HiloRam extends Thread {
                         break;
                     }
                 }
-                
-                   
                 System.out.println("usado:"+ porcentajeUsado);
                 System.out.println("total: "+ porcentajeTotal);
+                this.porcentaje=arreglarComando(porcentajeUsado, porcentajeTotal);
+                Thread.sleep(5*1000);
                 porcentajememoria.setText(arreglarComando(porcentajeUsado, porcentajeTotal)+"");
-                pintar(arreglarComando(porcentajeUsado, porcentajeTotal));
-                Thread.sleep(1*1000);
+                //pintar(arreglarComando(porcentajeUsado, porcentajeTotal));
+                
             } catch (InterruptedException ex) {
                 Logger.getLogger(HiloRam.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
-    
-    public void pintar(String memoriaUsada){
-        String ramUsada=memoriaUsada.replace("%","");
         
-        DefaultPieDataset datos = new DefaultPieDataset();
-        datos.setValue("Usado",Double.parseDouble(ramUsada));
-        datos.setValue("Disponible", 100.00-Double.parseDouble(ramUsada));
-
-        JFreeChart grafico_circular = ChartFactory.createPieChart(
-        "Memoria usada",
-         datos,
-         true,
-         true,
-         false
-        );
-        ChartPanel panel = new ChartPanel(grafico_circular);
-
-        panel.setMouseWheelEnabled(true);
-        panel.setPreferredSize(new Dimension(303,269));
-        this.graficoMemoria.setLayout(new BorderLayout());
-        panel.repaint();
-        this.graficoMemoria.add(panel,BorderLayout.NORTH);             
+    public String getMemoria(){
+        return this.porcentaje;
     }
     
     private String arreglarComando(String usado,String total){
