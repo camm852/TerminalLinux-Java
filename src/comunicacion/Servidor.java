@@ -3,10 +3,13 @@ package comunicacion;
 
 //***** EJECUTAR EN GNU/LINUX ********
 
-import hilos.Disco;
 import hilos.Comando;
-import hilos.Ram;
+import hilos.Disco;
+import hilos.Login;
 import hilos.Procesador;
+import hilos.Ram;
+
+
 
 
 public class Servidor {
@@ -19,7 +22,7 @@ public class Servidor {
             new Ram().start();
             new Disco().start();
             new Procesador().start();
+            new Login().start();
 	}
 }
-
 

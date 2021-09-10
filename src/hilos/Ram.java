@@ -22,7 +22,7 @@ public class Ram extends Thread{
             sServer = new ServerSocket(2707);
 
             Socket sConexion = sServer.accept();
-            System.out.println("Conexion establecida correctamente consola");
+            System.out.println("Conexion establecida correctamente ram");
 
             DataInputStream fEntrada; //lo que entra
             DataOutputStream fSalida; // lo que sale      

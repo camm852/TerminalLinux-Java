@@ -1,5 +1,6 @@
 package vista;
 
+import comunicacion.Cliente;
 import java.awt.Color;
 import javax.swing.JLabel;
 import login.Entrar;
@@ -7,10 +8,19 @@ import login.Entrar;
 public class Login extends javax.swing.JFrame {
     
     int xMouse,yMouse;    
-    
+    Cliente c;
     public Login() {
         initComponents();
-        incorrect.setVisible(false);
+        incorrect.setVisible(false);String ip="192.168.20.81";
+        c = new Cliente(ip,2708);
+        if(c.conectar()){
+        }else{
+            usuariotext.setText("Fallo al conectar al servidor");
+            passtext.setText("");
+            usuariotext.setEditable(false);
+            passtext.setEditable(false);
+            btnlogin.setEnabled(false);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -265,10 +275,10 @@ public class Login extends javax.swing.JFrame {
 
     private void btnloginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnloginMouseClicked
 
-        Entrar login = new Entrar();
-       
+        //Entrar login = new Entrar();
         try {
-            if(login.ingresar(usuariotext.getText(), String.valueOf(passtext.getPassword()))){
+            //if(login.ingresar(usuariotext.getText(), String.valueOf(passtext.getPassword()))){
+              if(c.login(usuariotext.getText(), String.valueOf(passtext.getPassword()))){
                 Thread.sleep((long) (0.5*1000));
                 new ClienteVista().setVisible(true);
                 this.setVisible(false);

@@ -15,10 +15,8 @@ public class Cliente {
     Socket socket;
     
     public Cliente(String ip,int puerto) {
-    	
     	this.ip=ip;
         this.puerto=puerto;
-
     }
     public boolean conectar(){
     	InetAddress IP;
@@ -33,6 +31,32 @@ public class Cliente {
             return false;
         }
     }
+    public Boolean login(String usuario,String pass){
+        DataOutputStream fSalida; //lo que envia
+        DataInputStream fEntrada; // lo que recibe 
+        try{
+            //lo que envia al servidor
+
+            fSalida = new DataOutputStream(socket.getOutputStream());
+            fSalida.writeUTF(usuario+"-"+pass);
+            //lo que trae del servidor
+            fEntrada = new DataInputStream(socket.getInputStream());
+            String entro = fEntrada.readUTF();
+            if(entro.contains("true")){
+                return true;
+            }else{
+                System.out.println("no entro");
+                return false;
+            }
+            
+        }catch(Exception e){
+            System.out.println("no se envio el login");
+            return null;
+        }
+        
+    }
+    
+    
     public String comando(String comando,String idenfificador){
         DataOutputStream fSalida; //lo que envia
         DataInputStream fEntrada; // lo que recibe 
