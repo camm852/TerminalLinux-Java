@@ -7,19 +7,12 @@ import java.util.logging.Logger;
 public class HiloDisco extends Thread {
     
     javax.swing.JLabel porcentajedisco;
-    javax.swing.JPanel graficoDisco;
     Cliente c;
     String porcentaje=null;
     
-    public HiloDisco(javax.swing.JLabel porcentajedisco, Cliente c,javax.swing.JPanel graficoDisco){
+    public HiloDisco(javax.swing.JLabel porcentajedisco, Cliente c){
         this.porcentajedisco=porcentajedisco;
         this.c=c;
-        this.graficoDisco=graficoDisco;
-        /*try {
-            Thread.sleep(1);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(HiloDisco.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
     }
     
     public void run(){

@@ -40,13 +40,13 @@ public class ClienteVista extends javax.swing.JFrame {
             comando.setText("Error al conectarse con el server");
             comando.setEditable(false);
         }
-        hram = new HiloRam(porcentajememoria,c4,memoria);
+        hram = new HiloRam(porcentajememoria,c4);
         hram.start();
         
         graficoRam=new GraficoRam(memoria,hram);
         graficoRam.start();
         
-        hdisco = new HiloDisco(porcentajedisco,c2,disco);
+        hdisco = new HiloDisco(porcentajedisco,c2);
         hdisco.start();
         
         graficoDisco = new GraficoDisco(disco,hdisco);

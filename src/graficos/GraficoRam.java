@@ -1,4 +1,4 @@
-package graficos;
+    package graficos;
 
 import hilos.HiloRam;
 import java.awt.BorderLayout;

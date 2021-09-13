@@ -10,16 +10,13 @@ import java.util.regex.Pattern;
 public class HiloRam extends Thread {
     
     javax.swing.JLabel porcentajememoria;
-    javax.swing.JPanel graficoMemoria;
     Cliente c;
     String porcentaje=null;
     
     
-    public HiloRam(javax.swing.JLabel porcentajememoria, Cliente c, javax.swing.JPanel graficoMemoria){
+    public HiloRam(javax.swing.JLabel porcentajememoria, Cliente c){
         this.porcentajememoria=porcentajememoria;
         this.c=c;
-        this.graficoMemoria=graficoMemoria;
-        
     }
     
     public void run(){        

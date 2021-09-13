@@ -28,10 +28,7 @@ public class Login extends Thread{
             System.out.println("Conexion establecida correctamente login");
 
             DataInputStream fEntrada; //lo que entra
-            DataOutputStream fSalida; // lo que sale      
-
-
-            ProcessBuilder b = null;
+            DataOutputStream fSalida; // lo que sale    
             do{
                 // lo que recibe del cliente
                 fEntrada = new DataInputStream(sConexion.getInputStream());

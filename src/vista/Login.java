@@ -11,7 +11,8 @@ public class Login extends javax.swing.JFrame {
     Cliente c;
     public Login() {
         initComponents();
-        incorrect.setVisible(false);String ip="192.168.20.81";
+        incorrect.setVisible(false);
+        String ip="192.168.20.81";
         c = new Cliente(ip,2708);
         if(c.conectar()){
         }else{
